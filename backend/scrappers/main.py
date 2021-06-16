@@ -1,6 +1,6 @@
 
 #%%
-import redditscrapper as rs
+from wallstreetbetsscrapper import WallStreetBetsScrapper
 import os
 from os.path import join, dirname
 from dotenv import load_dotenv
@@ -22,12 +22,12 @@ credentials = {
     "username":USERNAME_REDDIT,
 }
 
-reddit_scrapper = rs.RedditScrapper(credentials)
-posts = reddit_scrapper.get_hot_posts(subreddit_name="wallstreetbets",limit=30,flairs={"DD","YOLO"})
+wallstreetbets_scrapper = WallStreetBetsScrapper(credentials)
+posts = wallstreetbets_scrapper.get_hot_posts(subreddit_name="wallstreetbets",limit=30,flairs={"DD","YOLO"})
 
 
 # %% stocks extraction
-stocks = [reddit_scrapper.get_main_stock(post["text"]) for post in posts]
+stocks = [wallstreetbets_scrapper.get_main_stock(post["text"]) for post in posts]
 print(stocks)
 
 # %%
