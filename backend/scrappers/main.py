@@ -23,11 +23,11 @@ credentials = {
 }
 
 reddit_scrapper = rs.RedditScrapper(credentials)
-posts = reddit_scrapper.get_hot_posts("MMORPG",10)
+posts = reddit_scrapper.get_hot_posts(subreddit_name="wallstreetbets",limit=30,flairs={"DD","YOLO"})
 
 
 # %% stocks extraction
-reddit_post = posts[7]
-text=reddit_post["title"]+" "+reddit_post["selftext"]
-print(text)
-stocks = reddit_scrapper.extract_stocks(text)
+stocks = [reddit_scrapper.get_main_stock(post["text"]) for post in posts]
+print(stocks)
+
+# %%
